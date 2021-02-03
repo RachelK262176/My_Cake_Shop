@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:my_cake_shop/cake.dart';
 import 'package:my_cake_shop/cakeorderscreen.dart';
-import 'package:my_cake_shop/commentscreen.dart';
 import 'package:my_cake_shop/shoppingcartscreen.dart';
 import 'package:my_cake_shop/user.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-//import 'package:http/http.dart' as http;
-//import 'dart:convert';
 
 void main() => runApp(CakeScreen());
 
@@ -46,24 +42,18 @@ class _CakeScreenState extends State<CakeScreen> {
           )
         ],
       ),
-      floatingActionButton: SpeedDial(
-          animatedIcon: AnimatedIcons.menu_close,
-          backgroundColor: Colors.teal,
-          children: [
-            SpeedDialChild(
-                child: Icon(Icons.comment),
-                backgroundColor: Colors.lightBlue,
-                label: "I want comment",
-                labelBackgroundColor: Colors.white,
-                onTap: _comment),
-            SpeedDialChild(
-              child: Icon(Icons.shopping_bag_rounded),
-              backgroundColor: Colors.amber,
-              label: "Buy Now",
-              labelBackgroundColor: Colors.white,
-              onTap: _order,
-            ),
-          ]),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          _order();
+        },
+        icon: Icon(Icons.shopping_bag_rounded, color: Colors.white),
+        label: Text("Buy Now",
+            style: TextStyle(
+                fontStyle: FontStyle.italic,
+                fontWeight: FontWeight.w400,
+                fontSize: 14)),
+        backgroundColor: Colors.amber,
+      ),
       body: Container(
           child: Padding(
               padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
@@ -145,16 +135,6 @@ class _CakeScreenState extends State<CakeScreen> {
                   ])))),
       backgroundColor: Colors.cyan[50],
     );
-  }
-
-  Future<void> _comment() async {
-    await Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (BuildContext context) => CommentScreen(
-                  user: widget.user,
-                  cake: widget.cake,
-                )));
   }
 
   void _shoppinCartScreen() {

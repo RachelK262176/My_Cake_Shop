@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:my_cake_shop/cake.dart';
 import 'package:my_cake_shop/cakescreen.dart';
+import 'package:my_cake_shop/commentscreen.dart';
 import 'package:my_cake_shop/loginscreen.dart';
+import 'package:my_cake_shop/newcakescreen.dart';
 import 'package:my_cake_shop/shoppingcartscreen.dart';
 import 'package:my_cake_shop/user.dart';
 import 'dart:convert';
@@ -11,8 +14,9 @@ import 'package:progress_dialog/progress_dialog.dart';
 
 class MainScreen extends StatefulWidget {
   final User user;
+  final Cake cake;
 
-  const MainScreen({Key key, this.user}) : super(key: key);
+  const MainScreen({Key key, this.user, this.cake}) : super(key: key);
 
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -37,7 +41,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     screenHeight = MediaQuery.of(context).size.height;
     screenWidth = MediaQuery.of(context).size.width;
-    TextEditingController _cakenamecontroller = TextEditingController();
+    // TextEditingController _cakenamecontroller = TextEditingController();
 
     return SafeArea(
       child: Scaffold(
@@ -84,6 +88,25 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ],
         ),
+        floatingActionButton: SpeedDial(
+            animatedIcon: AnimatedIcons.menu_close,
+            backgroundColor: Colors.pinkAccent[400],
+            children: [
+              SpeedDialChild(
+                child: Icon(Icons.comment),
+                backgroundColor: Colors.lightBlue,
+                label: "I want comment",
+                labelBackgroundColor: Colors.white,
+                onTap: _comment,
+              ),
+              SpeedDialChild(
+                child: Icon(Icons.cake),
+                backgroundColor: Colors.purple,
+                label: "Add new cake",
+                labelBackgroundColor: Colors.white,
+                onTap: _addnew,
+              ),
+            ]),
         body: Column(children: [
           cakeList == null
               ? Flexible(
@@ -246,5 +269,25 @@ class _MainScreenState extends State<MainScreen> {
   void _logout() {
     Navigator.push(context,
         MaterialPageRoute(builder: (BuildContext context) => LoginScreen()));
+  }
+
+  Future<void> _comment() async {
+    await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (BuildContext context) => CommentScreen(
+                  user: widget.user,
+                  cake: widget.cake,
+                )));
+  }
+
+  Future<void> _addnew() async {
+    await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (BuildContext context) => NewCakeScreen(
+                  cake: widget.cake,
+                )));
+    _loadCake();
   }
 }

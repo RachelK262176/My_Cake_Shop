@@ -27,7 +27,7 @@ class _CommentScreenState extends State<CommentScreen> {
   @override
   void initState() {
     super.initState();
-    // _loadComment();
+    _loadComment();
   }
 
   @override
@@ -44,8 +44,7 @@ class _CommentScreenState extends State<CommentScreen> {
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Colors.white,
         onPressed: () {
-          _addComment();
-          //_bookScreen();
+          // _addComment();
         },
         icon: Icon(Icons.add_comment, color: Colors.blueGrey, size: 40),
         label: Text(""),
@@ -84,7 +83,7 @@ class _CommentScreenState extends State<CommentScreen> {
     );
   }
 
-  /*void _loadComment() {
+  void _loadComment() {
     http.post("http://rachelcake.com/mycakeshop/php/load_comment.php", body: {
       "email": widget.user.email,
     }).then((res) {
@@ -145,56 +144,53 @@ class _CommentScreenState extends State<CommentScreen> {
       print(err);
     });
   }
-}*/
-
-  void _addComment() {
-    showDialog(
-      context: context,
-      builder: (context) => new AlertDialog(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20.0))),
-        title: new Text(
-          'Do you want to say something?',
-          style: TextStyle(
-              //color: Colors.white,
-              ),
-        ),
-        content: new TextField(
-          style: TextStyle(fontSize: 20),
-          controller: _commentcontroller,
-          keyboardType: TextInputType.text,
-          maxLines: 4,
-          decoration: InputDecoration(
-              hintText: 'Lets say something! ',
-              hintStyle: TextStyle(color: Colors.grey),
-              icon: Icon(Icons.notes)),
-        ),
-        actions: <Widget>[
-          MaterialButton(
-              onPressed: () {
-                Navigator.of(context).pop(false);
-                _send();
-              },
-              child: Text(
-                "Ok",
-                style: TextStyle(
-                    //color: Color.fromRGBO(101, 255, 218, 50),
-                    ),
-              )),
-          MaterialButton(
-              onPressed: () {
-                Navigator.of(context).pop(false);
-              },
-              child: Text(
-                "Cancel",
-                style: TextStyle(
-                    //color: Color.fromRGBO(101, 255, 218, 50),
-                    ),
-              )),
-        ],
-      ),
-    );
-  }
-
-  void _send() {}
 }
+
+/*void _addComment() {
+  showDialog(
+    context: context,
+    builder: (context) => new AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20.0))),
+      title: new Text(
+        'Do you want to say something?',
+        style: TextStyle(
+            //color: Colors.white,
+            ),
+      ),
+      content: new TextField(
+        style: TextStyle(fontSize: 20),
+        controller: _commentcontroller,
+        keyboardType: TextInputType.text,
+        maxLines: 4,
+        decoration: InputDecoration(
+            hintText: 'Lets say something! ',
+            hintStyle: TextStyle(color: Colors.grey),
+            icon: Icon(Icons.notes)),
+      ),
+      actions: <Widget>[
+        MaterialButton(
+            onPressed: () {
+              Navigator.of(context).pop(false);
+              _send();
+            },
+            child: Text(
+              "Ok",
+              style: TextStyle(
+                  //color: Color.fromRGBO(101, 255, 218, 50),
+                  ),
+            )),
+        MaterialButton(
+            onPressed: () {
+              Navigator.of(context).pop(false);
+            },
+            child: Text(
+              "Cancel",
+              style: TextStyle(
+                  //color: Color.fromRGBO(101, 255, 218, 50),
+                  ),
+            )),
+      ],
+    ),
+  );
+}*/
