@@ -4,7 +4,7 @@ import 'package:my_cake_shop/cake.dart';
 import 'package:my_cake_shop/cakescreen.dart';
 import 'package:my_cake_shop/commentscreen.dart';
 import 'package:my_cake_shop/loginscreen.dart';
-import 'package:my_cake_shop/newcakescreen.dart';
+import 'package:my_cake_shop/addnewscreen.dart';
 import 'package:my_cake_shop/shoppingcartscreen.dart';
 import 'package:my_cake_shop/user.dart';
 import 'dart:convert';
@@ -93,18 +93,18 @@ class _MainScreenState extends State<MainScreen> {
             backgroundColor: Colors.pinkAccent[400],
             children: [
               SpeedDialChild(
-                child: Icon(Icons.comment),
-                backgroundColor: Colors.lightBlue,
-                label: "I want comment",
-                labelBackgroundColor: Colors.white,
-                onTap: _comment,
-              ),
-              SpeedDialChild(
                 child: Icon(Icons.cake),
-                backgroundColor: Colors.purple,
+                backgroundColor: Colors.purple[300],
                 label: "Add new cake",
                 labelBackgroundColor: Colors.white,
                 onTap: _addnew,
+              ),
+              SpeedDialChild(
+                child: Icon(Icons.comment),
+                backgroundColor: Colors.blue,
+                label: "Review Comment",
+                labelBackgroundColor: Colors.white,
+                onTap: _comment,
               ),
             ]),
         body: Column(children: [
@@ -285,7 +285,7 @@ class _MainScreenState extends State<MainScreen> {
     await Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (BuildContext context) => NewCakeScreen(
+            builder: (BuildContext context) => AddNewScreen(
                   cake: widget.cake,
                 )));
     _loadCake();

@@ -281,11 +281,6 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         SizedBox(height: 3),
-                        /*Text("Distance from restaurant " +
-                            distance.toStringAsFixed(2) +
-                            " KM"),
-                        Text("Delivery Charge RM " +
-                            delcharge.toStringAsFixed(2)),*/
                         Text(
                             "Food/s price RM:" + totalPrice.toStringAsFixed(2)),
                         Text("Total amount payable RM " +

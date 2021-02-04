@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:my_cake_shop/addcommentscreen.dart';
 import 'package:my_cake_shop/cake.dart';
 import 'package:my_cake_shop/cakeorderscreen.dart';
 import 'package:my_cake_shop/shoppingcartscreen.dart';
@@ -25,8 +27,6 @@ class _CakeScreenState extends State<CakeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //   var quantity =
-    //       Iterable<int>.generate(int.parse(widget.cake.quantity) + 1).toList();
     screenHeight = MediaQuery.of(context).size.height;
     screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -42,18 +42,25 @@ class _CakeScreenState extends State<CakeScreen> {
           )
         ],
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          _order();
-        },
-        icon: Icon(Icons.shopping_bag_rounded, color: Colors.white),
-        label: Text("Buy Now",
-            style: TextStyle(
-                fontStyle: FontStyle.italic,
-                fontWeight: FontWeight.w400,
-                fontSize: 14)),
-        backgroundColor: Colors.amber,
-      ),
+      floatingActionButton: SpeedDial(
+          animatedIcon: AnimatedIcons.menu_close,
+          backgroundColor: Colors.teal,
+          children: [
+            SpeedDialChild(
+              child: Icon(Icons.shopping_bag_rounded, color: Colors.white),
+              backgroundColor: Colors.amber,
+              label: "Buy Now",
+              labelBackgroundColor: Colors.white,
+              onTap: _order,
+            ),
+            SpeedDialChild(
+              child: Icon(Icons.add_comment),
+              backgroundColor: Colors.lightBlue,
+              label: "Add Comment",
+              labelBackgroundColor: Colors.white,
+              onTap: _addcomment,
+            ),
+          ]),
       body: Container(
           child: Padding(
               padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
@@ -151,6 +158,16 @@ class _CakeScreenState extends State<CakeScreen> {
         context,
         MaterialPageRoute(
             builder: (BuildContext context) => CakeOrderScreen(
+                  cake: widget.cake,
+                  user: widget.user,
+                )));
+  }
+
+  void _addcomment() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (BuildContext context) => AddCommentScreen(
                   cake: widget.cake,
                   user: widget.user,
                 )));
