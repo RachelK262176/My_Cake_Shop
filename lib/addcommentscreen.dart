@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_cake_shop/cake.dart';
+import 'package:my_cake_shop/reviewcommentscreen.dart';
 import 'package:my_cake_shop/user.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:http/http.dart' as http;
@@ -39,8 +40,18 @@ class _AddCommentScreenState extends State<AddCommentScreen> {
     return Scaffold(
         backgroundColor: Colors.lightBlue[50],
         appBar: AppBar(
-          title: Text("Comment of " + widget.cake.cakename),
+          title: Text("Comment Screen"),
           backgroundColor: Colors.lightBlue[900],
+          actions: <Widget>[
+            Flexible(
+              child: IconButton(
+                icon: Icon(Icons.comment_bank, color: Colors.white, size: 35),
+                onPressed: () {
+                  _reviewCommentScreen();
+                },
+              ),
+            ),
+          ],
         ),
         body: Container(
             child: Padding(
@@ -64,17 +75,15 @@ class _AddCommentScreenState extends State<AddCommentScreen> {
                             ),
                           )),
                       SizedBox(height: 20),
-                      Row(children: [
-                        Text("Name: ",
-                            style: TextStyle(
+                      Text("Name: ",
+                          style: TextStyle(
+                            fontSize: 20,
+                          )),
+                      Text(widget.cake.cakename,
+                          style: TextStyle(
                               fontSize: 20,
-                            )),
-                        Text(widget.cake.cakename,
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontStyle: FontStyle.italic,
-                                color: Colors.blue[900])),
-                      ]),
+                              fontStyle: FontStyle.italic,
+                              color: Colors.blue[900])),
                       SizedBox(height: 20),
                       Row(children: [
                         Text("Any comment about this recepi? ",
@@ -114,6 +123,7 @@ class _AddCommentScreenState extends State<AddCommentScreen> {
   void _addComment() {
     http.post("http://rachelcake.com/mycakeshop/php/insert_comment.php", body: {
       "email": widget.user.email,
+      "name": widget.user.name,
       "cakename": widget.cake.cakename,
       "comment": _commentcontroller.text,
       "image": widget.cake.image,
@@ -183,5 +193,15 @@ class _AddCommentScreenState extends State<AddCommentScreen> {
         );
       },
     );
+  }
+
+  Future<void> _reviewCommentScreen() async {
+    await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (BuildContext context) => ReviewCommentScreen(
+                  user: widget.user,
+                  cake: widget.cake,
+                )));
   }
 }

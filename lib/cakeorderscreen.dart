@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_cake_shop/cake.dart';
+import 'package:my_cake_shop/shoppingcartscreen.dart';
 import 'package:my_cake_shop/user.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:http/http.dart' as http;
@@ -42,6 +43,16 @@ class _CakeOrderScreenState extends State<CakeOrderScreen> {
         appBar: AppBar(
           title: Text('Order Screen'),
           backgroundColor: Colors.amber,
+          actions: <Widget>[
+            Flexible(
+              child: IconButton(
+                icon: Icon(Icons.shopping_cart, color: Colors.white, size: 35),
+                onPressed: () {
+                  _shoppinCartScreen();
+                },
+              ),
+            ),
+          ],
         ),
         body: Container(
             child: Padding(
@@ -65,17 +76,15 @@ class _CakeOrderScreenState extends State<CakeOrderScreen> {
                             ),
                           )),
                       SizedBox(height: 15),
-                      Row(children: [
-                        Text("Name: ",
-                            style: TextStyle(
-                              fontSize: 18,
-                            )),
-                        Text(widget.cake.cakename,
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontStyle: FontStyle.italic,
-                                color: Colors.purple[900])),
-                      ]),
+                      Text("Name: ",
+                          style: TextStyle(
+                            fontSize: 18,
+                          )),
+                      Text(widget.cake.cakename,
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontStyle: FontStyle.italic,
+                              color: Colors.purple[900])),
                       SizedBox(height: 15),
                       Row(children: [
                         Text("Price per piece: RM",
@@ -222,5 +231,14 @@ class _CakeOrderScreenState extends State<CakeOrderScreen> {
     }).catchError((err) {
       print(err);
     });
+  }
+
+  void _shoppinCartScreen() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (BuildContext context) => ShoppingCartScreen(
+                  user: widget.user,
+                )));
   }
 }

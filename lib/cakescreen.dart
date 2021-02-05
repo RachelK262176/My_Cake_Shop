@@ -3,6 +3,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:my_cake_shop/addcommentscreen.dart';
 import 'package:my_cake_shop/cake.dart';
 import 'package:my_cake_shop/cakeorderscreen.dart';
+import 'package:my_cake_shop/reviewcommentscreen.dart';
 import 'package:my_cake_shop/shoppingcartscreen.dart';
 import 'package:my_cake_shop/user.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -35,11 +36,20 @@ class _CakeScreenState extends State<CakeScreen> {
         title: Text(widget.cake.cakename),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.shopping_cart, color: Colors.white, size: 35),
+            icon: Icon(Icons.shopping_cart, color: Colors.white, size: 30),
             onPressed: () {
               _shoppinCartScreen();
             },
-          )
+          ),
+          Flexible(
+            child: IconButton(
+              icon: Icon(Icons.comment_bank),
+              iconSize: 30,
+              onPressed: () {
+                _reviewCommentScreen();
+              },
+            ),
+          ),
         ],
       ),
       floatingActionButton: SpeedDial(
@@ -170,6 +180,16 @@ class _CakeScreenState extends State<CakeScreen> {
             builder: (BuildContext context) => AddCommentScreen(
                   cake: widget.cake,
                   user: widget.user,
+                )));
+  }
+
+  Future<void> _reviewCommentScreen() async {
+    await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (BuildContext context) => ReviewCommentScreen(
+                  user: widget.user,
+                  cake: widget.cake,
                 )));
   }
 }

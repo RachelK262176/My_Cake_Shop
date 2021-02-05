@@ -66,9 +66,19 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
         child: Scaffold(
       backgroundColor: Colors.orange[50],
       appBar: AppBar(
-        title: Text('Your Shopping Cart'),
-        backgroundColor: Colors.orange[900],
-      ),
+          title: Text('Your Shopping Cart'),
+          backgroundColor: Colors.orange[900],
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.refresh_rounded,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                _loadCart();
+              },
+            ),
+          ]),
       body: Column(
         children: [
           cartList == null
@@ -91,7 +101,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                         padding: EdgeInsets.all(1),
                         child: Card(
                             child: InkWell(
-                          onTap: () => _loadCakeDetails(index),
+                          onTap: () => null, //_loadCakeDetails(index),
                           onLongPress: () => _deleteOrderDialog(index),
                           child: SingleChildScrollView(
                             child: Row(
@@ -119,20 +129,24 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                                     Text(
                                       cartList[index]['cakename'],
                                       style: TextStyle(
-                                          fontSize: 16,
+                                          fontSize: 18,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    Text("RM " +
-                                        cartList[index]['cakeprice'] +
-                                        " x " +
-                                        cartList[index]['cakeqty'] +
-                                        " piece"),
-                                    Text("Total RM " +
-                                        (double.parse(cartList[index]
-                                                    ['cakeprice']) *
-                                                int.parse(
-                                                    cartList[index]['cakeqty']))
-                                            .toStringAsFixed(2))
+                                    Text(
+                                        "RM " +
+                                            cartList[index]['cakeprice'] +
+                                            " x " +
+                                            cartList[index]['cakeqty'] +
+                                            " piece",
+                                        style: TextStyle(fontSize: 15)),
+                                    Text(
+                                        "Total RM " +
+                                            (double.parse(cartList[index]
+                                                        ['cakeprice']) *
+                                                    int.parse(cartList[index]
+                                                        ['cakeqty']))
+                                                .toStringAsFixed(2),
+                                        style: TextStyle(fontSize: 18))
                                   ],
                                 ),
                               ],
@@ -340,14 +354,18 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
     });
   }
 
-  _loadCakeDetails(int index) async {
+  /* _loadCakeDetails(int index) async {
     Cake curcake = new Cake(
-        cakeid: cartList[index]['cakeid'],
-        cakename: cartList[index]['cakename'],
-        cakeprice: cartList[index]['cakeprice'],
-        quantity: cartList[index]['quantity'],
-        image: cartList[index]['image'],
-        remark: cartList[index]['remark']);
+      cakeid: cartList[index]['cakeid'],
+      cakename: cartList[index]['cakename'],
+      cakeprice: cartList[index]['cakeprice'],
+      quantity: cartList[index]['quantity'],
+      //ingredients: cartList[index]['ingredients'],
+      // step: cartList[index]['step'],
+      image: cartList[index]['image'],
+    );
+    // rating: cartList[index]['rating'],
+    //  remark: cartList[index]['remark']);
 
     await Navigator.push(
         context,
@@ -357,7 +375,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                   user: widget.user,
                 )));
     _loadCart();
-  }
+  }*/
 
   _deleteOrderDialog(int index) {
     print("Delete " + cartList[index]['cakename']);

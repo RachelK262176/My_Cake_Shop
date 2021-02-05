@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:my_cake_shop/cake.dart';
 import 'package:my_cake_shop/cakescreen.dart';
-import 'package:my_cake_shop/commentscreen.dart';
+import 'package:my_cake_shop/reviewcommentscreen.dart';
 import 'package:my_cake_shop/loginscreen.dart';
 import 'package:my_cake_shop/addnewscreen.dart';
 import 'package:my_cake_shop/shoppingcartscreen.dart';
@@ -51,27 +51,9 @@ class _MainScreenState extends State<MainScreen> {
               style: TextStyle(fontSize: 20, color: Colors.white)),
           backgroundColor: Colors.pink[900],
           actions: <Widget>[
-            /*Container(
-                width: screenWidth / 2.2,
-                padding: EdgeInsets.fromLTRB(3, 10, 1, 10),
-                child: TextField(
-                  autofocus: false,
-                  controller: _cakenamecontroller,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: new OutlineInputBorder(
-                      borderRadius: const BorderRadius.all(
-                        const Radius.circular(5.0),
-                      ),
-                    ),
-                    prefixIcon: Icon(Icons.cake),
-                  ),
-                )),
-            SizedBox(width: 5),*/
             Flexible(
               child: IconButton(
-                icon: Icon(Icons.shopping_cart, color: Colors.white, size: 35),
+                icon: Icon(Icons.shopping_cart, color: Colors.white, size: 30),
                 onPressed: () {
                   _shoppinCartScreen();
                 },
@@ -94,14 +76,14 @@ class _MainScreenState extends State<MainScreen> {
             children: [
               SpeedDialChild(
                 child: Icon(Icons.cake),
-                backgroundColor: Colors.purple[300],
-                label: "Add new cake",
+                backgroundColor: Colors.purple[700],
+                label: "Add new",
                 labelBackgroundColor: Colors.white,
                 onTap: _addnew,
               ),
               SpeedDialChild(
-                child: Icon(Icons.comment),
-                backgroundColor: Colors.blue,
+                child: Icon(Icons.comment_bank),
+                backgroundColor: Colors.blue[900],
                 label: "Review Comment",
                 labelBackgroundColor: Colors.white,
                 onTap: _comment,
@@ -275,7 +257,7 @@ class _MainScreenState extends State<MainScreen> {
     await Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (BuildContext context) => CommentScreen(
+            builder: (BuildContext context) => ReviewCommentScreen(
                   user: widget.user,
                   cake: widget.cake,
                 )));
