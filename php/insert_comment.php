@@ -1,24 +1,19 @@
 <?php
 error_reporting(0);
 include_once("dbconnect.php");
+//$commentid = $_POST['commentid'];
 $email = $_POST['email'];
-$cakeid = $_POST['cakeid'];
+$cakename = $_POST['cakename'];
+$name = $_POST['name'];
 $comment = $_POST['comment'];
 $image = $_POST['image'];
+//$commentdate = $_POST['commentdate'];
 
-//$sqlcheck = "SELECT * FROM COMMENT WHERE CAKEID = '$cakeid' AND EMAIL = '$email'";
-//$result = $conn->query($sqlcheck);
-//if ($result->num_rows > 0) {
-//    $sqlupdate = "UPDATE CAKEORDER SET CAKEQTY = '$cakeqty',REMARK = '$remark' WHERE CAKEID = '$cakeid' AND EMAIL = '$email'";
-//    if ($conn->query($sqlupdate) === TRUE){
-//       echo "success";
-//    }  
-//}
-//else{
-    $sqlinsert = "INSERT INTO COMMENT(EMAIL,CAKEID,COMMENT,IMAGE) VALUES ('$email','$cakeid','$comment','$image')";
+$sqlinsert = "INSERT INTO COMMENT(EMAIL,CAKENAME,NAME,COMMENT,IMAGE) VALUES ('$email','$cakename','$name','$comment','$image')";
     if ($conn->query($sqlinsert) === TRUE){
        echo "success";
-    }    
-//}
+    } else {
+    echo "failed";
+}    
 
 ?>
